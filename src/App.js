@@ -2,9 +2,15 @@ import React from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import green from "@material-ui/core/colors/green";
 
-import { AppLayout } from "./components/AppLayout";
+import { Store } from "./components/Store";
+
+import { BrowserRouter, Route } from "react-router-dom";
+import { Checkout } from "./components/Checkout";
 
 import "./App.css";
+import { AppContainer } from "./components/Layout/AppContainer";
+import { AppNavbar } from "./components/Layout/AppNavbar";
+import { AppFooter } from "./components/Layout/AppFooter";
 
 const theme = createMuiTheme({
   palette: {
@@ -21,9 +27,16 @@ const theme = createMuiTheme({
 });
 
 const App = () => (
-  <ThemeProvider theme={theme}>
-    <AppLayout></AppLayout>
-  </ThemeProvider>
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <AppNavbar></AppNavbar>
+      <AppContainer>
+        <Route path="/" exact component={Store}></Route>
+        <Route path="/checkout" component={Checkout}></Route>
+      </AppContainer>
+      <AppFooter></AppFooter>
+    </ThemeProvider>
+  </BrowserRouter>
 );
 
 export default App;

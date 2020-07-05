@@ -57,8 +57,7 @@ export const AmiiboCard = ({ amiibo }) => {
     setOpen(false);
   };
 
-  const cart = useSelector((state) => state);
-  // console.log("AmiiboCard -> cart", cart);
+  const cart = useSelector(({ cart }) => cart);
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {

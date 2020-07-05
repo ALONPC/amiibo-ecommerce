@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 import axios from "axios";
 
 import { AmiiboCard } from "./AmiiboCard";
+import { Backdrop, CircularProgress } from "@material-ui/core";
 
 export const AmiiboList = () => {
   const [amiibos, setAmiibos] = useState([]);
@@ -44,13 +45,21 @@ export const AmiiboList = () => {
       paddingTop: theme.spacing(8),
       paddingBottom: theme.spacing(8),
     },
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: "#fff",
+    },
   }));
 
   const classes = useStyles();
 
   return (
     <Container className={classes.cardGrid} maxWidth="lg">
-      {loading && <h1>Loading...</h1>}
+      {loading && (
+        <Backdrop className={classes.backdrop} open={true}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       <Grid container spacing={4}>
         {amiibos.map((amiibo) => (
           <Grid item xs={12} sm={6} md={3}>
