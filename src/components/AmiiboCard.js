@@ -19,8 +19,8 @@ import { IconButton } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 
 export const AmiiboCard = ({ amiibo }) => {
-  console.log("AmiiboCard -> amiibo", amiibo);
-  const { character, image, amiiboSeries } = amiibo;
+  // console.log("AmiiboCard -> amiibo", amiibo);
+  const { character, image, amiiboSeries, price } = amiibo;
   const useStyles = makeStyles((theme) => ({
     icon: {
       marginRight: theme.spacing(2),
@@ -61,8 +61,6 @@ export const AmiiboCard = ({ amiibo }) => {
   }));
 
   const classes = useStyles();
-
-  const price = 9990;
 
   return (
     <Card className={classes.card}>

@@ -117,7 +117,7 @@ export const AppLayout = () => {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Amiibo Store
         </Typography>
         <Typography
           variant="subtitle1"

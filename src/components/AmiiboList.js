@@ -20,8 +20,8 @@ import { AmiiboCard } from "./AmiiboCard";
 export const AmiiboList = () => {
   const [amiibos, setAmiibos] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log("ListAmiibo -> amiibos", amiibos);
-  console.log("ListAmiibo -> loading", loading);
+  // console.log("ListAmiibo -> amiibos", amiibos);
+  // console.log("ListAmiibo -> loading", loading);
 
   useEffect(() => {
     getAmiibos();
@@ -34,10 +34,22 @@ export const AmiiboList = () => {
         setLoading(false);
         return res.data.amiibo;
       });
-    const filteredAmiibos = amiibos.filter(
-      (amiibo) => amiibo.amiiboSeries === "Super Smash Bros."
-    );
-    setAmiibos(filteredAmiibos);
+    const filteredAmiibos = amiibos.slice(0, 100);
+    injectPrices(filteredAmiibos);
+  };
+
+  const injectPrices = (amiibos) => {
+    const possiblePrices = [8990, 9990, 12990, 15990, 19990];
+    let randomPrice;
+    const amiibosWithPrices = amiibos.map((amiibo) => {
+      randomPrice =
+        possiblePrices[Math.floor(Math.random() * possiblePrices.length)];
+      return {
+        ...amiibo,
+        price: randomPrice,
+      };
+    });
+    setAmiibos(amiibosWithPrices);
   };
 
   const useStyles = makeStyles((theme) => ({
@@ -76,6 +88,7 @@ export const AmiiboList = () => {
 
   return (
     <Container className={classes.cardGrid} maxWidth="lg">
+      {loading && <h1>Loading...</h1>}
       <Grid container spacing={4}>
         {amiibos.map((amiibo) => (
           <Grid item xs={12} sm={6} md={3}>
