@@ -20,7 +20,7 @@ import { useTheme } from "@material-ui/core/styles";
 
 export const AmiiboCard = ({ amiibo }) => {
   console.log("AmiiboCard -> amiibo", amiibo);
-  const { character, image } = amiibo;
+  const { character, image, amiiboSeries } = amiibo;
   const useStyles = makeStyles((theme) => ({
     icon: {
       marginRight: theme.spacing(2),
@@ -40,13 +40,19 @@ export const AmiiboCard = ({ amiibo }) => {
       height: "100%",
       display: "flex",
       flexDirection: "column",
-      padding: "24px",
-    },
-    cardMedia: {
-      paddingTop: "56.25%", // 16:9
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 18,
     },
     cardContent: {
-      flexGrow: 1,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+    },
+    cardMedia: {
+      maxWidth: "100%",
+      height: 140,
     },
     footer: {
       backgroundColor: theme.palette.background.paper,
@@ -56,22 +62,23 @@ export const AmiiboCard = ({ amiibo }) => {
 
   const classes = useStyles();
 
+  const price = 9990;
+
   return (
     <Card className={classes.card}>
-      <Typography gutterBottom variant="h5" component="h2">
-        {character}
-      </Typography>
-      <CardMedia
+      <CardContent className={classes.cardContent}>
+        <Typography variant="h4">{character}</Typography>
+      </CardContent>
+      {/* <CardMedia
         className={classes.cardMedia}
         image={image}
-        title="Image title"
-      />
+        title={character}></CardMedia> */}
+      <img className={classes.cardMedia} src={image} alt={character}></img>
       <CardContent className={classes.cardContent}>
-        <Typography>
-          This is a media card. You can use this section to describe the
-          content.
-        </Typography>
+        <Typography variant="subtitle1">{amiiboSeries}</Typography>
+        <Typography variant="h4">{`$${price}`}</Typography>
       </CardContent>
+
       <CardActions>
         <Button
           variant="contained"

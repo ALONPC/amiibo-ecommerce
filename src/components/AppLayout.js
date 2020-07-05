@@ -70,7 +70,7 @@ export const AppLayout = () => {
       <AppBar position="relative">
         <Toolbar>
           <VideogameAssetIcon className={classes.icon} />
-          <Typography variant="h6" color="inherit" noWrap>
+          <Typography variant="h4" color="inherit" noWrap>
             Amiibo Store
           </Typography>
         </Toolbar>

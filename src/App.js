@@ -5,6 +5,8 @@ import green from "@material-ui/core/colors/green";
 
 import { AppLayout } from "./components/AppLayout";
 
+import "./App.css";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -15,7 +17,7 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: ["Lato", "sans-serif"].join(","),
+    fontFamily: "Lato",
   },
 });
 
