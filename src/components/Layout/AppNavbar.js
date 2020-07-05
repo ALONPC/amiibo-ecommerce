@@ -9,6 +9,7 @@ import {
   makeStyles,
   AppBar,
   Popover,
+  useTheme,
 } from "@material-ui/core";
 import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -24,6 +25,16 @@ export const AppNavbar = () => {
     separator: {
       display: "flex",
       justifyContent: "flex-end",
+    },
+    toolBar: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    logo: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
     },
   }));
 
@@ -42,6 +53,7 @@ export const AppNavbar = () => {
 
   const classes = useStyles();
 
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleCartPopover = (e) => {
     setAnchorEl(e.currentTarget);
@@ -56,48 +68,55 @@ export const AppNavbar = () => {
 
   return (
     <AppBar position="sticky">
-      <Toolbar>
-        <VideogameAssetIcon
-          edge="start"
-          className={classes.appBarIcon}
-          color="inherit"
-          aria-label="menu"
-        />
-        <NavLink to="/" style={{ color: "inherit", textDecoration: "inherit" }}>
-          <Typography
-            variant="h4"
+      <Toolbar className={classes.toolBar}>
+        <div className={classes.logo}>
+          <VideogameAssetIcon
+            edge="start"
+            className={classes.appBarIcon}
             color="inherit"
-            noWrap
-            className={classes.appBarName}>
-            Amiibo Store
-          </Typography>
-        </NavLink>
-        {/* <NavLink
-          to="/checkout"
-          style={{ color: "inherit", textDecoration: "inherit" }}> */}
-        <Tooltip title="Ir al carrito">
-          <IconButton color="inherit" onClick={handleCartPopover}>
-            <StyledBadge badgeContent={cart.length} color="secondary" showZero>
-              <ShoppingCartIcon />
-            </StyledBadge>
-          </IconButton>
-        </Tooltip>
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "center",
-          }}>
-          <CartPopoverContent></CartPopoverContent>
-        </Popover>
-        {/* </NavLink> */}
+            aria-label="menu"
+          />
+          <NavLink to="/" style={theme.navLink}>
+            <Typography
+              variant="h4"
+              color="inherit"
+              noWrap
+              className={classes.appBarName}>
+              Amiibo Store
+            </Typography>
+          </NavLink>
+        </div>
+        <div>
+          {/* <NavLink
+            to="/checkout"
+            style={{ color: "inherit", textDecoration: "inherit" }}> */}
+          <Tooltip title="Ir al carrito">
+            <IconButton color="inherit" onClick={handleCartPopover}>
+              <StyledBadge
+                badgeContent={cart.length}
+                color="secondary"
+                showZero>
+                <ShoppingCartIcon />
+              </StyledBadge>
+            </IconButton>
+          </Tooltip>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}>
+            <CartPopoverContent></CartPopoverContent>
+          </Popover>
+          {/* </NavLink> */}
+        </div>
       </Toolbar>
     </AppBar>
   );

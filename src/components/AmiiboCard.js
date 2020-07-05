@@ -13,9 +13,13 @@ import MuiAlert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
 import { useSelector, useDispatch } from "react-redux";
 import allActions from "../redux/actions";
+import { NavLink } from "react-router-dom";
 
 export const AmiiboCard = ({ amiibo }) => {
   const { character, image, amiiboSeries, price } = amiibo;
+
+  const theme = useTheme();
+  console.log("AmiiboCard -> theme", theme);
 
   const Alert = (props) => (
     <MuiAlert elevation={6} variant="filled" {...props} />
@@ -70,7 +74,9 @@ export const AmiiboCard = ({ amiibo }) => {
       <CardContent className={classes.cardContent}>
         <Typography variant="h4">{character}</Typography>
       </CardContent>
-      <img className={classes.cardMedia} src={image} alt={character}></img>
+      <NavLink to="/amiibo/:id" style={theme.navLink}>
+        <img className={classes.cardMedia} src={image} alt={character}></img>
+      </NavLink>
       <CardContent className={classes.cardContent}>
         <Typography variant="subtitle1">{amiiboSeries}</Typography>
         <Typography variant="h4">{`$${price}`}</Typography>

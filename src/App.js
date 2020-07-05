@@ -11,6 +11,7 @@ import "./App.css";
 import { AppContainer } from "./components/Layout/AppContainer";
 import { AppNavbar } from "./components/Layout/AppNavbar";
 import { AppFooter } from "./components/Layout/AppFooter";
+import { AmiiboDetail } from "./components/AmiiboDetail";
 
 const theme = createMuiTheme({
   palette: {
@@ -24,6 +25,11 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: "Lato",
   },
+  navLink: {
+    // to avoid the underline becase of the a element
+    color: "inherit",
+    textDecoration: "inherit",
+  },
 });
 
 const App = () => (
@@ -33,6 +39,7 @@ const App = () => (
       <AppContainer>
         <Route path="/" exact component={Store}></Route>
         <Route path="/checkout" component={Checkout}></Route>
+        <Route path="/amiibo/:id" component={AmiiboDetail}></Route>
       </AppContainer>
       <AppFooter></AppFooter>
     </ThemeProvider>
