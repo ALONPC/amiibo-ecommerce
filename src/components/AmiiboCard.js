@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -8,10 +8,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
 import { useTheme } from "@material-ui/core/styles";
+import { Snackbar, IconButton } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
+import { useSelector, useDispatch } from "react-redux";
+import allActions from "../redux/actions";
 
 export const AmiiboCard = ({ amiibo }) => {
-  console.log("AmiiboCard -> amiibo", amiibo);
   const { character, image, amiiboSeries, price } = amiibo;
+
+  const Alert = (props) => (
+    <MuiAlert elevation={6} variant="filled" {...props} />
+  );
+
   const useStyles = makeStyles((theme) => ({
     cardGrid: {
       paddingTop: theme.spacing(8),
@@ -39,6 +48,24 @@ export const AmiiboCard = ({ amiibo }) => {
 
   const classes = useStyles();
 
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const cart = useSelector((state) => state);
+  // console.log("AmiiboCard -> cart", cart);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    setOpen(true);
+    dispatch(allActions.addAmiiboToCart(amiibo));
+  };
+
   return (
     <Card className={classes.card}>
       <CardContent className={classes.cardContent}>
@@ -51,12 +78,34 @@ export const AmiiboCard = ({ amiibo }) => {
       </CardContent>
       <CardActions>
         <Button
+          onClick={handleAddToCart}
           variant="contained"
           color="primary"
           size="medium"
           startIcon={<AddShoppingCartIcon />}>
           Agregar al carrito
         </Button>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+          open={open}
+          autoHideDuration={1000}
+          onClose={handleClose}
+          action={
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          }>
+          <Alert onClose={handleClose} severity="success">
+            "Producto agregado!"
+          </Alert>
+        </Snackbar>
       </CardActions>
     </Card>
   );

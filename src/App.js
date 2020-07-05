@@ -5,7 +5,6 @@ import green from "@material-ui/core/colors/green";
 import { AppLayout } from "./components/AppLayout";
 
 import "./App.css";
-import { AmiiboDetail } from "./components/AmiiboDetail";
 
 const theme = createMuiTheme({
   palette: {

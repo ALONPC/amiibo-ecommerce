@@ -4,11 +4,12 @@ import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import { IconButton } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { IconButton, Badge } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 import { AmiiboList } from "./AmiiboList";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -23,10 +24,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    right: -6,
+    top: 4,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+    color: "white",
+  },
+}))(Badge);
+
 export const AppLayout = () => {
   const classes = useStyles();
+
+  const cart = useSelector(({ cart }) => cart);
+  console.log("AppLayout -> cart", cart);
+
   return (
-    <>
+    <div>
       <CssBaseline />
       <AppBar position="sticky">
         <Toolbar>
@@ -43,8 +58,11 @@ export const AppLayout = () => {
             className={classes.appBarName}>
             Amiibo Store
           </Typography>
+
           <IconButton color="inherit">
-            <ShoppingCartIcon />
+            <StyledBadge badgeContent={cart.length} color="secondary" showZero>
+              <ShoppingCartIcon />
+            </StyledBadge>
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -59,6 +77,6 @@ export const AppLayout = () => {
           {`Copyright © Amiibo Store ${new Date().getFullYear()}.`}
         </Typography>
       </footer>
-    </>
+    </div>
   );
 };

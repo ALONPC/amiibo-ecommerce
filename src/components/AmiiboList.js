@@ -54,7 +54,7 @@ export const AmiiboList = () => {
       <Grid container spacing={4}>
         {amiibos.map((amiibo) => (
           <Grid item xs={12} sm={6} md={3}>
-            <AmiiboCard amiibo={amiibo}></AmiiboCard>
+            <AmiiboCard key={amiibo.head} amiibo={amiibo}></AmiiboCard>
           </Grid>
         ))}
       </Grid>
