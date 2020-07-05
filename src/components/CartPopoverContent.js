@@ -9,7 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,15 +106,21 @@ export const CartPopoverContent = () => {
         <ListItem alignItems="flex-end">
           <ListItemText
             secondary={
-              <>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}>
                 <Typography
                   component="span"
-                  variant="body2"
+                  variant="h6"
                   className={classes.inline}
                   color="textPrimary">
                   {`TOTAL: ${cartTotal}`}
                 </Typography>
-              </>
+                <Button color="secondary">Checkout</Button>
+              </div>
             }></ListItemText>
         </ListItem>
       )}
