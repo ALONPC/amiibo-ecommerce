@@ -16,6 +16,8 @@ import Link from "@material-ui/core/Link";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { IconButton } from "@material-ui/core";
 
+import { useTheme } from "@material-ui/core/styles";
+
 export const AmiiboCard = ({ amiibo }) => {
   console.log("AmiiboCard -> amiibo", amiibo);
   const { character, image } = amiibo;
@@ -79,10 +81,6 @@ export const AmiiboCard = ({ amiibo }) => {
           startIcon={<AddShoppingCartIcon />}>
           Agregar al carrito
         </Button>
-        {/* <IconButton
-          children={<AddShoppingCartIcon></AddShoppingCartIcon>}
-          size="small"
-          color="primary"></IconButton> */}
       </CardActions>
     </Card>
   );
