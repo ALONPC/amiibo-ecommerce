@@ -10,6 +10,7 @@ import {
   AppBar,
   Popover,
   useTheme,
+  Grid,
 } from "@material-ui/core";
 import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -22,18 +23,15 @@ export const AppNavbar = () => {
     appBarIcon: {
       marginRight: theme.spacing(2),
     },
-    separator: {
-      display: "flex",
-      justifyContent: "flex-end",
-    },
-    toolBar: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
+
     logo: {
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "flex-start",
+      alignItems: "center",
+    },
+    cartButton: {
+      display: "flex",
+      justifyContent: "flex-end",
       alignItems: "center",
     },
   }));
@@ -69,54 +67,62 @@ export const AppNavbar = () => {
   return (
     <AppBar position="sticky">
       <Toolbar className={classes.toolBar}>
-        <div className={classes.logo}>
-          <VideogameAssetIcon
-            edge="start"
-            className={classes.appBarIcon}
-            color="inherit"
-            aria-label="menu"
-          />
-          <NavLink to="/" style={theme.navLink}>
-            <Typography
-              variant="h4"
-              color="inherit"
-              noWrap
-              className={classes.appBarName}>
-              Amiibo Store
-            </Typography>
-          </NavLink>
-        </div>
-        <div>
-          {/* <NavLink
+        <Grid container>
+          <Grid item xs={6}>
+            <div className={classes.logo}>
+              <VideogameAssetIcon
+                edge="start"
+                className={classes.appBarIcon}
+                color="inherit"
+                aria-label="menu"
+              />
+              <NavLink to="/" style={theme.navLink}>
+                <Typography
+                  variant="h4"
+                  color="inherit"
+                  noWrap
+                  className={classes.appBarName}>
+                  Amiibo Store
+                </Typography>
+              </NavLink>
+            </div>
+          </Grid>
+
+          <Grid item xs={5}>
+            <div className={classes.cartButton}>
+              {/* <NavLink
             to="/checkout"
             style={{ color: "inherit", textDecoration: "inherit" }}> */}
-          <Tooltip title="Ir al carrito">
-            <IconButton color="inherit" onClick={handleCartPopover}>
-              <StyledBadge
-                badgeContent={cart.length}
-                color="secondary"
-                showZero>
-                <ShoppingCartIcon />
-              </StyledBadge>
-            </IconButton>
-          </Tooltip>
-          <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "center",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "center",
-            }}>
-            <CartPopoverContent></CartPopoverContent>
-          </Popover>
-          {/* </NavLink> */}
-        </div>
+              <Tooltip title="Ir al carrito">
+                <IconButton color="inherit" onClick={handleCartPopover}>
+                  <StyledBadge
+                    badgeContent={cart.length}
+                    color="secondary"
+                    showZero>
+                    <ShoppingCartIcon />
+                  </StyledBadge>
+                </IconButton>
+              </Tooltip>
+              <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}>
+                <CartPopoverContent></CartPopoverContent>
+              </Popover>
+              {/* </NavLink> */}
+            </div>
+          </Grid>
+          <Grid item xs={1}></Grid>
+        </Grid>
       </Toolbar>
     </AppBar>
   );

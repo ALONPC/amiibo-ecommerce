@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
   inline: {
     display: "inline",
   },
+  emptyCartPopup: {
+    width: "100%",
+    height: 40,
+  },
 }));
 
 export const CartPopoverContent = () => {
@@ -44,22 +48,16 @@ export const CartPopoverContent = () => {
     <List className={classes.root}>
       {emptyCart && (
         <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Remy Sharp" />
-          </ListItemAvatar>
           <ListItemText
-            primary="Brunch this weekend?"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary">
-                  Ali Connors
-                </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
-              </React.Fragment>
+            className={classes.emptyCartPopup}
+            primary={
+              <Typography
+                component="span"
+                variant="h6"
+                className={classes.inline}
+                color="textPrimary">
+                (Tu carro está vacío)
+              </Typography>
             }
           />
         </ListItem>
