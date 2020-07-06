@@ -4,7 +4,7 @@ export const cart = (state = [], action) => {
       return [...state, { ...action.amiibo }];
     case "REMOVE_AMIIBO_FROM_CART":
       const updatedCart = state.cart.filter(
-        (amiibo) => amiibo.head === action.amiibo.head
+        (amiibo) => amiibo.id === action.amiibo.id
       );
       return [...state, ...updatedCart];
     default:

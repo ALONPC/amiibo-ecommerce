@@ -47,7 +47,6 @@ export const AppNavbar = () => {
   }))(Badge);
 
   const cart = useSelector(({ cart }) => cart);
-  console.log("AppNavbar -> cart", cart);
 
   const classes = useStyles();
 

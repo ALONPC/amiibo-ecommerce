@@ -6,38 +6,53 @@ import axios from "axios";
 
 import { AmiiboCard } from "./AmiiboCard";
 import { Backdrop, CircularProgress } from "@material-ui/core";
+import { useSelector, useDispatch } from "react-redux";
+import allActions from "../redux/actions";
 
 export const AmiiboList = () => {
-  const [amiibos, setAmiibos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getAmiibos();
   }, []);
 
+  const allAmiibos = useSelector(({ amiibo }) => amiibo);
+  console.log("AmiiboList -> allAmiibos", allAmiibos);
+  const dispatch = useDispatch();
+
   const getAmiibos = async () => {
-    const amiibos = await axios
-      .get("https://www.amiiboapi.com/api/amiibo")
-      .then((res) => {
-        setLoading(false);
-        return res.data.amiibo;
-      });
-    const filteredAmiibos = amiibos.slice(0, 100);
-    injectPrices(filteredAmiibos);
+    if (allAmiibos.length === 0) {
+      console.log("ENTRE");
+      const amiibos = await axios
+        .get("https://www.amiiboapi.com/api/amiibo")
+        .then((res) => {
+          setLoading(false);
+          return res.data.amiibo;
+        });
+      const filteredAmiibos = amiibos.slice(0, 100);
+      const adjustedAmiibos = adjustAmiibos(filteredAmiibos);
+      dispatch(allActions.saveAmiibos(adjustedAmiibos));
+    } else {
+      setLoading(false);
+    }
   };
 
-  const injectPrices = (amiibos) => {
+  const adjustAmiibos = (amiibos) => {
+    // sets a random price and the full id for each amiibo
     const possiblePrices = [8990, 9990, 12990, 15990, 19990];
     let randomPrice;
-    const amiibosWithPrices = amiibos.map((amiibo) => {
+    const adjustedAmiibos = amiibos.map(({ head, tail, ...amiibo }) => {
       randomPrice =
         possiblePrices[Math.floor(Math.random() * possiblePrices.length)];
       return {
         ...amiibo,
+        head,
+        tail,
+        id: `${head}${tail}`,
         price: randomPrice,
       };
     });
-    setAmiibos(amiibosWithPrices);
+    return adjustedAmiibos;
   };
 
   const useStyles = makeStyles((theme) => ({
@@ -61,11 +76,12 @@ export const AmiiboList = () => {
         </Backdrop>
       )}
       <Grid container spacing={4}>
-        {amiibos.map((amiibo) => (
-          <Grid item xs={12} sm={6} md={3}>
-            <AmiiboCard key={amiibo.head} amiibo={amiibo}></AmiiboCard>
-          </Grid>
-        ))}
+        {!!allAmiibos.length &&
+          allAmiibos.map((amiibo) => (
+            <Grid item xs={12} sm={6} md={3}>
+              <AmiiboCard key={amiibo.id} amiibo={amiibo}></AmiiboCard>
+            </Grid>
+          ))}
       </Grid>
     </Container>
   );

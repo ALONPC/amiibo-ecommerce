@@ -37,13 +37,11 @@ export const CartPopoverContent = ({ handleClose }) => {
   const dispatch = useDispatch();
 
   const emptyCart = cart.length === 0;
-  console.log("CartPopoverContent -> emptyCart", emptyCart);
 
   useEffect(() => {
     const total = cart.reduce((acc, curr) => {
       return acc + curr.price;
     }, 0);
-    console.log("CartPopoverContent -> total", total);
     setCartTotal(total);
   }, [cart]);
 

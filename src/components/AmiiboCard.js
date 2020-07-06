@@ -16,10 +16,9 @@ import allActions from "../redux/actions";
 import { NavLink } from "react-router-dom";
 
 export const AmiiboCard = ({ amiibo }) => {
-  const { character, image, amiiboSeries, price, type } = amiibo;
+  const { id, character, image, amiiboSeries, price, type } = amiibo;
 
   const theme = useTheme();
-  console.log("AmiiboCard -> theme", theme);
 
   const Alert = (props) => (
     <MuiAlert elevation={6} variant="filled" {...props} />
@@ -74,7 +73,7 @@ export const AmiiboCard = ({ amiibo }) => {
       <CardContent className={classes.cardContent}>
         <Typography variant="h4">{character}</Typography>
       </CardContent>
-      <NavLink to="/amiibo/:id" style={theme.navLink}>
+      <NavLink to={`/amiibo/${id}`} style={theme.navLink}>
         <img className={classes.cardMedia} src={image} alt={character}></img>
       </NavLink>
       <CardContent className={classes.cardContent}>
