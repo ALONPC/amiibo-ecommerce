@@ -4,6 +4,6 @@ export const addAmiiboToCart = (amiibo) => ({
 });
 
 export const removeAmiiboFromCart = (amiibo) => ({
-  type: "REMOVE_AMIIBO_TO_CART",
+  type: "REMOVE_AMIIBO_FROM_CART",
   amiibo,
 });

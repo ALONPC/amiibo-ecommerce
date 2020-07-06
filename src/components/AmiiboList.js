@@ -17,12 +17,10 @@ export const AmiiboList = () => {
   }, []);
 
   const allAmiibos = useSelector(({ amiibo }) => amiibo);
-  console.log("AmiiboList -> allAmiibos", allAmiibos);
   const dispatch = useDispatch();
 
   const getAmiibos = async () => {
     if (allAmiibos.length === 0) {
-      console.log("ENTRE");
       const amiibos = await axios
         .get("https://www.amiiboapi.com/api/amiibo")
         .then((res) => {

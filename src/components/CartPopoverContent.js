@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { IconButton, Button } from "@material-ui/core";
 import { NavLink, Router, useHistory } from "react-router-dom";
+import allActions from "../redux/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +45,10 @@ export const CartPopoverContent = ({ handleClose }) => {
     }, 0);
     setCartTotal(total);
   }, [cart]);
+
+  const handleRemoveFromCart = (amiibo) => {
+    dispatch(allActions.removeAmiiboFromCart(amiibo));
+  };
 
   const goToCheckout = () => {
     handleClose(null);
@@ -87,7 +92,7 @@ export const CartPopoverContent = ({ handleClose }) => {
                           justifyContent: "space-between",
                           alignItems: "center",
                         }}>
-                        <IconButton>
+                        <IconButton onClick={() => handleRemoveFromCart(item)}>
                           <RemoveCircleOutlineIcon color="primary"></RemoveCircleOutlineIcon>
                         </IconButton>
                         <Typography
