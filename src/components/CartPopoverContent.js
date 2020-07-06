@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { IconButton, Button } from "@material-ui/core";
+import { NavLink, Router, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,10 +27,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const CartPopoverContent = () => {
+export const CartPopoverContent = ({ handleClose }) => {
   const classes = useStyles();
 
   const [cartTotal, setCartTotal] = useState(0);
+  const history = useHistory();
+
   const cart = useSelector(({ cart }) => cart);
   const dispatch = useDispatch();
 
@@ -43,6 +46,11 @@ export const CartPopoverContent = () => {
     console.log("CartPopoverContent -> total", total);
     setCartTotal(total);
   }, [cart]);
+
+  const goToCheckout = () => {
+    handleClose(null);
+    history.push("/checkout");
+  };
 
   return (
     <List className={classes.root}>
@@ -117,7 +125,9 @@ export const CartPopoverContent = () => {
                   color="textPrimary">
                   {`TOTAL: ${cartTotal}`}
                 </Typography>
-                <Button color="secondary">Checkout</Button>
+                <Button onClick={goToCheckout} color="secondary">
+                  Checkout
+                </Button>
               </div>
             }></ListItemText>
         </ListItem>

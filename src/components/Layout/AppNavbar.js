@@ -52,13 +52,13 @@ export const AppNavbar = () => {
   const classes = useStyles();
 
   const theme = useTheme();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const handleCartPopover = (e) => {
     setAnchorEl(e.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleClose = (element) => {
+    setAnchorEl(element);
   };
 
   const open = Boolean(anchorEl);
@@ -107,7 +107,7 @@ export const AppNavbar = () => {
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                onClose={handleClose}
+                onClose={() => handleClose(null)}
                 anchorOrigin={{
                   vertical: "bottom",
                   horizontal: "center",
@@ -116,7 +116,8 @@ export const AppNavbar = () => {
                   vertical: "top",
                   horizontal: "center",
                 }}>
-                <CartPopoverContent></CartPopoverContent>
+                <CartPopoverContent
+                  handleClose={handleClose}></CartPopoverContent>
               </Popover>
               {/* </NavLink> */}
             </div>
