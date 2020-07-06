@@ -126,7 +126,7 @@ export const CartContent = ({ handleClose }) => {
                   variant="h6"
                   className={classes.inline}
                   color="textPrimary">
-                  {`TOTAL: ${cartTotal}`}
+                  {`TOTAL: $${cartTotal}`}
                 </Typography>
 
                 <Button onClick={goToCheckout} color="secondary">
