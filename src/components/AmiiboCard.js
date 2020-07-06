@@ -11,7 +11,7 @@ import { useTheme } from "@material-ui/core/styles";
 import { Snackbar, IconButton } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import allActions from "../redux/actions";
 import { NavLink } from "react-router-dom";
 
@@ -60,7 +60,6 @@ export const AmiiboCard = ({ amiibo }) => {
     setOpen(false);
   };
 
-  const cart = useSelector(({ cart }) => cart);
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {

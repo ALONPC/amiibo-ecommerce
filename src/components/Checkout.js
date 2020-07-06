@@ -48,7 +48,7 @@ export const Checkout = () => {
     if (cart.length === 0) {
       history.push("/");
     }
-  }, []);
+  });
 
   const total = cart.reduce((acc, curr) => {
     return acc + curr.price;

@@ -14,7 +14,7 @@ export const AmiiboList = () => {
 
   useEffect(() => {
     getAmiibos();
-  }, []);
+  });
 
   const allAmiibos = useSelector(({ amiibo }) => amiibo);
   const dispatch = useDispatch();
