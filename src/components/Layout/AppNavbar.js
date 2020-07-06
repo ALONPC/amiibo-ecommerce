@@ -16,7 +16,7 @@ import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { CartPopoverContent } from "../CartPopoverContent";
+import { CartContent } from "../CartContent";
 
 export const AppNavbar = () => {
   const useStyles = makeStyles((theme) => ({
@@ -115,8 +115,7 @@ export const AppNavbar = () => {
                   vertical: "top",
                   horizontal: "center",
                 }}>
-                <CartPopoverContent
-                  handleClose={handleClose}></CartPopoverContent>
+                <CartContent handleClose={handleClose}></CartContent>
               </Popover>
               {/* </NavLink> */}
             </div>

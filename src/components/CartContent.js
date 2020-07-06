@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { IconButton, Button } from "@material-ui/core";
-import { NavLink, Router, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import allActions from "../redux/actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const CartPopoverContent = ({ handleClose }) => {
+export const CartContent = ({ handleClose }) => {
   const classes = useStyles();
 
   const [cartTotal, setCartTotal] = useState(0);
