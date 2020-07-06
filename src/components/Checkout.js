@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   makeStyles,
   Container,
@@ -15,9 +15,10 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import MuiAlert from "@material-ui/lab/Alert";
 
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  cardGrid: {
+  grid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
@@ -40,8 +41,14 @@ const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
 export const Checkout = () => {
   const classes = useStyles();
-
   const cart = useSelector(({ cart }) => cart);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      history.push("/");
+    }
+  }, []);
 
   const total = cart.reduce((acc, curr) => {
     return acc + curr.price;
@@ -54,7 +61,7 @@ export const Checkout = () => {
   };
 
   return (
-    <Container className={classes.cardGrid} maxWidth="lg">
+    <Container className={classes.grid} maxWidth="lg">
       <h1>Checkout</h1>
       {cart.map((item) => {
         const { character, price, image, amiiboSeries } = item;

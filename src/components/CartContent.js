@@ -128,6 +128,7 @@ export const CartContent = ({ handleClose }) => {
                   color="textPrimary">
                   {`TOTAL: ${cartTotal}`}
                 </Typography>
+
                 <Button onClick={goToCheckout} color="secondary">
                   Checkout
                 </Button>
